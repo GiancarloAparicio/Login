@@ -14,6 +14,7 @@ import "jquery";
 import "popper.js";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Consumer from "./Consumer";
 
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
     <ProviderContext>
       <NavBar />
       <Modal />
+      <Consumer />
     </ProviderContext>
   );
 }

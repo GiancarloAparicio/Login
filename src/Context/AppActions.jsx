@@ -1,9 +1,11 @@
 import { CHANGE_CURRENT_USER, CHANGE_EXISTS_CURRENT_USER } from "./AppType";
 
-export let currentUser = {
-  type: CHANGE_CURRENT_USER
-};
+export let currentUser =(user)=> ({
+  type: CHANGE_CURRENT_USER,
+  payload:user
+});
 
-export let existsCurrentUser = {
-  type: CHANGE_EXISTS_CURRENT_USER
-};
+export let existsCurrentUser =(currentUser)=> ({
+  type: CHANGE_EXISTS_CURRENT_USER,
+  payload:currentUser
+});

@@ -1,17 +1,16 @@
 import React, { useContext } from "react";
 import AppContext from "./Context/AppContext";
-import { sumar, restar } from "./Context/AppActions";
 
 const Consumer = () => {
   let [state, dispatch] = useContext(AppContext);
 
+  console.log(state)
   return (
     <div>
-      <h2>{state}</h2>
-      <button onClick={() => dispatch(sumar)}>Sumar</button>
-      <button onClick={() => dispatch(restar)}>Restar</button>
+      <h2>Estado de la app</h2>
     </div>
   );
+  //dispatch para cambiar store
 };
 
 export default Consumer;

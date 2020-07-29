@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import * as Firebase from "../Firebase/Firebase";
 
+import  { useContext}  from "react";
+import AppContext from "../Context/AppContext";
+import {existsCurrentUser} from "../Context/AppActions"
+
 const Modal = () => {
   const [data, setData] = useState({
     email: "",
     password: ""
   });
+
+  let [state, dispatch] = useContext(AppContext);
+
 
   const inputChange = event => {
     setData({
@@ -14,9 +21,12 @@ const Modal = () => {
     });
   };
 
-  const RegisterUser = event => {
+  const RegisterUser = async (event) => {
     event.preventDefault();
-    Firebase.registerUser(data.email, data.password);
+    let band= await Firebase.registerUser(data.email, data.password);
+   
+    dispatch(existsCurrentUser(band))
+    
   };
 
   return (
