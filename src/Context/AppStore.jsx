@@ -14,7 +14,7 @@ let allInputs = {
 
 
 export const initalState = {
-  currentUserExists: false,
+  currentUserExists: localStorage["SESSION"],
   currentUser: {},
   validateInputs: allInputs
 };

@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import * as Firebase from "../Firebase/Firebase";
 
+//Context
 import { useContext } from "react";
 import AppContext from "../Context/AppContext";
-import { existsCurrentUser } from "../Context/AppActions"
+
+//Components
 import Input from "../Components/Input";
+
+import {statusInputs} from "../Context/AppActions"
 
 const Modal = () => {
   const [data, setData] = useState({
@@ -22,15 +26,14 @@ const Modal = () => {
     });
   };
 
-  const RegisterUser = async (event) => {
+  const RegisterUser = (event) => {
     event.preventDefault();
-    let band = await Firebase.registerUser(data.email, data.password);
-
-    //User existente change
-    dispatch(existsCurrentUser(band))
-
-    console.log(state)
+    Firebase.registerUser(data.email, data.password, dispatch);
   };
+
+  const resetInputs = () => {
+    dispatch(statusInputs("reset-status", "register"))
+  }
 
   return (
     <form
@@ -60,26 +63,26 @@ const Modal = () => {
           </button>
         </div>
         <div className="modal-body">
-      
+
           <Input name="email"
-                 type="email"
-                 id="Email1"
-                 validate={state?.validateInputs?.inputRegisterEmail}
-                 placeholder="Enter email"
-                 onChange={inputChange} />
+            type="email"
+            id="Email1"
+            validate={state?.validateInputs?.registerInputEmail}
+            placeholder="Enter email"
+            onChange={inputChange} />
           <Input name="password"
-                 type="password"
-                 id="Password2"
-                 validate={state?.validateInputs?.inputRegisterPassword}
-                 placeholder="Password"
-                 onChange={inputChange} />
+            type="password"
+            id="Password1"
+            validate={state?.validateInputs?.registerInputPassword}
+            placeholder="Password"
+            onChange={inputChange} />
         </div>
 
         <div className="modal-footer">
           <button type="submit" className="btn btn-success" >
             Register
           </button>
-          <button type="reset" className="btn btn-danger" data-dismiss="modal">
+          <button type="reset" className="btn btn-danger" onClick={resetInputs} data-dismiss="modal">
             Close
           </button>
         </div>

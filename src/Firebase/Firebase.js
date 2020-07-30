@@ -3,7 +3,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 //Actions
-import { currentUser, statusInputs } from "../Context/AppActions";
+import { currentUser, statusInputs, existsCurrentUser } from "../Context/AppActions";
 
 export const startFirebase = () => {
   let Config = {
@@ -20,20 +20,17 @@ export const startFirebase = () => {
   firebase.initializeApp(Config);
 };
 
-export const registerUser = (email, password) => {
+export const registerUser = (email, password, dispatch) => {
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then(() => {
-      console.log("Usuario registrado");
-      //Enviar email para verificar la cuenta del usuario
+      dispatch(existsCurrentUser(true))
+      dispatch(statusInputs("reset-status", "register"))
       confirmEmail();
     })
     .catch(function (error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorMessage);
-      console.log(errorCode);
+      dispatch(statusInputs(error.code, "register"))
     });
 };
 
@@ -43,10 +40,13 @@ export const loginUser = (email, password, dispatch) => {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(() => {
-      dispatch(statusInputs("reset-status-login"))
+      console.log("Iniciando session")
+        localStorage["SESSION"] = true;
+        dispatch(existsCurrentUser(true))
+        dispatch(statusInputs("reset-status", "login"))
     })
     .catch((error) => {
-      dispatch(statusInputs(error.code))
+      dispatch(statusInputs(error.code, "login"))
     });
 };
 
@@ -71,11 +71,13 @@ export const confirmEmail = () => {
     });
 };
 
-export const closeUser = () => {
-  firebase.auth().signOut().then(() => {
-    console.log("session cerrada")
-  }).catch(function (error) {
-    // An error happened.
-  });
+export const closeUser = (dispatch) => {
+  firebase.auth().signOut()
+    .then(() => {
+      dispatch(existsCurrentUser(false))
+      
+    }).catch(function (error) {
+      console.warn(error)
+    });
 
 }

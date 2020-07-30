@@ -1,8 +1,15 @@
 import React, { useState, useContext } from "react"
-import * as Firebase from "../Firebase/Firebase"
+
+//Firebase
+import {loginUser} from "../Firebase/Firebase"
+
+//Components
 import Input from "../Components/Input"
-import AppContext from "../Context/AppContext"
+
+//Context
 import {statusInputs} from "../Context/AppActions"
+import AppContext from "../Context/AppContext"
+
 
 const LoginForm = () => {
 
@@ -23,11 +30,11 @@ const LoginForm = () => {
     const loginForm = (event) => {
         event.preventDefault();
 
-        Firebase.loginUser(user.email, user.password,dispatch)
+        loginUser(user.email, user.password,dispatch)
     }
 
     const resetInputs=()=>{
-        dispatch(statusInputs("reset-status-login"))
+        dispatch(statusInputs("reset-status","login"))
     }
 
     return (
@@ -37,14 +44,14 @@ const LoginForm = () => {
                 <Input  name="email"
                         type="email" 
                         id="Email2"
-                        validate={state?.validateInputs?.inputLoginEmail}
+                        validate={state?.validateInputs?.loginInputEmail}
                         placeholder="Enter email"
                         onChange={inputChange} />
 
                 <Input  name="password"
                         type="password" 
                         id="Password2"
-                        validate={state?.validateInputs?.inputLoginPassword}
+                        validate={state?.validateInputs?.loginInputPassword}
                         placeholder="Password"
                         onChange={inputChange} />
 

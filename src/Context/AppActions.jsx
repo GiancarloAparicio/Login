@@ -7,40 +7,37 @@ export const currentUser = (user) => ({
 
 export const existsCurrentUser = (currentUser) => ({
   type: CHANGE_EXISTS_CURRENT_USER,
-  payload: currentUser
+  payload: saveExistsCurrentUser(currentUser)
 });
 
-export const statusInputs = (status) => ({
+export const statusInputs = (status,authForm) => ({
   type: VALIDATE_STATUS_INPUTS,
-  payload: validateStatusInputs(status)
+  payload: validateStatusInputs(status,authForm)
 })
 
+const saveExistsCurrentUser=(status)=>{
+    localStorage["SESSION"]=status
+    return status
+}
 
-const validateStatusInputs = (response) => {
+const validateStatusInputs = (response,authForm) => {
 
   if (response === "auth/invalid-email") {
     return ({
-      inputLoginEmail:"is-invalid"
+      [authForm+"InputEmail"]:"is-invalid"
     })
   }
   if (response=== "auth/wrong-password") {
     return ({
-      inputLoginEmail:"is-valid",
-      inputLoginPassword: "is-invalid"
+      [authForm+"InputEmail"]:"is-valid",
+      [authForm+"InputPassword"]: "is-invalid"
     })
   }
 
-  if(response==="reset-status-login"){
+  if(response==="reset-status"){
     return ({
-      inputLoginEmail:"",
-      inputLoginPassword: ""
-    })
-  }
-
-  if(response==="reset-status-register"){
-    return ({
-      inputRegisterEmail:"",
-      inputRegisterPassword: ""
+      [authForm+"InputEmail"]:"",
+      [authForm+"InputPassword"]: ""
     })
   }
 

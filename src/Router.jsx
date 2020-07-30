@@ -23,9 +23,8 @@ const RouterPages = () => {
     return (
         <>
             <Router>
-
                 <Switch>
-                    <Route exact path="/" component={ state?.currentUser?.email? HomePage :LoginPage} />
+                    <Route exact path="/" component={ state?.currentUserExists? HomePage :LoginPage} />
                 </Switch>
             </Router>
             
