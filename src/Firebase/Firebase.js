@@ -3,7 +3,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 //Actions
-import { currentUser } from "../Context/AppActions";
+import { currentUser, statusInputs } from "../Context/AppActions";
 
 export const startFirebase = () => {
   let Config = {
@@ -20,14 +20,14 @@ export const startFirebase = () => {
   firebase.initializeApp(Config);
 };
 
-export const registerUser =  (email, password) => {
-    firebase
+export const registerUser = (email, password) => {
+  firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then(() => {
       console.log("Usuario registrado");
       //Enviar email para verificar la cuenta del usuario
-       confirmEmail();
+      confirmEmail();
     })
     .catch(function (error) {
       var errorCode = error.code;
@@ -37,49 +37,45 @@ export const registerUser =  (email, password) => {
     });
 };
 
-export const loginUser = (email, password) => {
+export const loginUser = (email, password, dispatch) => {
 
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(function () {
-      console.log("Login exito");
-
+    .then(() => {
+      dispatch(statusInputs("reset-status-login"))
     })
-    .catch(function (error) {
-      let errorCode = error.code;
-      let errorMessage = error.message;
-      console.log(errorMessage);
-      console.log(errorCode);
+    .catch((error) => {
+      dispatch(statusInputs(error.code))
     });
 };
 
 export const listener = (dispatch) => {
-  firebase.auth().onAuthStateChanged((user)=>{
-    if(user){
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
       dispatch(currentUser(user))
     }
   });
 }
 
-export const confirmEmail =  () => {
-    firebase
+export const confirmEmail = () => {
+  firebase
     .auth()
     .currentUser.sendEmailVerification()
     .then(() => {
       console.log("Usuario email confirmed");
-      
+
     })
     .catch(error => {
       console.warn(error);
     });
 };
 
-export const closeUser = ()=>{
-  firebase.auth().signOut().then(() =>{
+export const closeUser = () => {
+  firebase.auth().signOut().then(() => {
     console.log("session cerrada")
-  }).catch(function(error) {
+  }).catch(function (error) {
     // An error happened.
   });
-  
+
 }

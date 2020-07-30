@@ -1,7 +1,12 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import * as Firebase from "../Firebase/Firebase"
+import Input from "../Components/Input"
+import AppContext from "../Context/AppContext"
+import {statusInputs} from "../Context/AppActions"
 
 const LoginForm = () => {
+
+    let [state,dispatch]=useContext(AppContext)
 
     const [user, setUser] = useState({
         email: "",
@@ -18,44 +23,36 @@ const LoginForm = () => {
     const loginForm = (event) => {
         event.preventDefault();
 
-        Firebase.loginUser(user.email,user.password)
+        Firebase.loginUser(user.email, user.password,dispatch)
+    }
+
+    const resetInputs=()=>{
+        dispatch(statusInputs("reset-status-login"))
     }
 
     return (
-        <>
-
+        <>  
             <form onSubmit={loginForm} method="POST" className="card container mx-auto p-3">
                 <h4 className="p-2" >Login User:</h4>
-                <div className="form-group">
-                    <label htmlFor="Email1">Email address</label>
-                    <input
-                        name="email"
-                        type="email"
-                        autoComplete="off"
-                        className="form-control"
-                        id="Email1"
-                        aria-describedby="emailHelp"
+                <Input  name="email"
+                        type="email" 
+                        id="Email2"
+                        validate={state?.validateInputs?.inputLoginEmail}
                         placeholder="Enter email"
-                        onChange={inputChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="Password1">Password</label>
-                    <input
-                        name="password"
-                        type="password"
-                        autoComplete="off"
-                        className="form-control"
-                        id="Password1"
+                        onChange={inputChange} />
+
+                <Input  name="password"
+                        type="password" 
+                        id="Password2"
+                        validate={state?.validateInputs?.inputLoginPassword}
                         placeholder="Password"
-                        onChange={inputChange}
-                    />
-                </div>
+                        onChange={inputChange} />
+
                 <div className="form-group mx-auto">
                     <button type="submit" className="btn mr-2 btn-success">
                         Register
                     </button>
-                    <button type="reset" className="btn btn-danger">
+                    <button type="reset" className="btn btn-danger" onClick={resetInputs}>
                         Close
                     </button>
                 </div>

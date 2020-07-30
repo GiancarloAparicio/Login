@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import * as Firebase from "../Firebase/Firebase";
 
-import  { useContext}  from "react";
+import { useContext } from "react";
 import AppContext from "../Context/AppContext";
-import {existsCurrentUser} from "../Context/AppActions"
+import { existsCurrentUser } from "../Context/AppActions"
+import Input from "../Components/Input";
 
 const Modal = () => {
   const [data, setData] = useState({
@@ -23,11 +24,11 @@ const Modal = () => {
 
   const RegisterUser = async (event) => {
     event.preventDefault();
-    let band= await Firebase.registerUser(data.email, data.password);
-   
+    let band = await Firebase.registerUser(data.email, data.password);
+
     //User existente change
     dispatch(existsCurrentUser(band))
-    
+
     console.log(state)
   };
 
@@ -59,34 +60,23 @@ const Modal = () => {
           </button>
         </div>
         <div className="modal-body">
-          <div className="form-group">
-            <label htmlFor="Email1">Email address</label>
-            <input
-              name="email"
-              type="email"
-              autoComplete="off"
-              className="form-control"
-              id="Email1"
-              aria-describedby="emailHelp"
-              placeholder="Enter email"
-              onChange={inputChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="Password1">Password</label>
-            <input
-              name="password"
-              type="password"
-              autoComplete="off"
-              className="form-control"
-              id="Password1"
-              placeholder="Password"
-              onChange={inputChange}
-            />
-          </div>
+      
+          <Input name="email"
+                 type="email"
+                 id="Email1"
+                 validate={state?.validateInputs?.inputRegisterEmail}
+                 placeholder="Enter email"
+                 onChange={inputChange} />
+          <Input name="password"
+                 type="password"
+                 id="Password2"
+                 validate={state?.validateInputs?.inputRegisterPassword}
+                 placeholder="Password"
+                 onChange={inputChange} />
         </div>
+
         <div className="modal-footer">
-          <button type="submit" className="btn btn-success">
+          <button type="submit" className="btn btn-success" >
             Register
           </button>
           <button type="reset" className="btn btn-danger" data-dismiss="modal">
