@@ -20,14 +20,14 @@ export const startFirebase = () => {
   firebase.initializeApp(Config);
 };
 
-export const registerUser = async (email, password) => {
-  return await firebase
+export const registerUser =  (email, password) => {
+    firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then(() => {
       console.log("Usuario registrado");
       //Enviar email para verificar la cuenta del usuario
-      return confirmEmail();
+       confirmEmail();
     })
     .catch(function (error) {
       var errorCode = error.code;
@@ -62,17 +62,16 @@ export const listener = (dispatch) => {
   });
 }
 
-export const confirmEmail = async () => {
-  return await firebase
+export const confirmEmail =  () => {
+    firebase
     .auth()
     .currentUser.sendEmailVerification()
     .then(() => {
       console.log("Usuario email confirmed");
-      return true;
+      
     })
     .catch(error => {
       console.warn(error);
-      return false;
     });
 };
 
