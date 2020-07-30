@@ -1,30 +1,33 @@
 import React from "react";
 import "./styles.css";
-import ProviderContext from "./Context/ProviderContext";
-//import Consumer from "./Consumer";
 
+//Context
+import ProviderContext from "./Context/ProviderContext";
+
+
+//Firebase
 import * as Firebase from "./Firebase/Firebase";
 
-//Includes
-import NavBar from "./includes/NavBar";
-import Modal from "./includes/Modal";
 
 //Bootstrap
 import "jquery";
 import "popper.js";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Consumer from "./Consumer";
+import RouterPages from "./Router";
 
 
-export default function App() {
+
+
+ const App=()=> {
+
   Firebase.startFirebase();
 
   return (
     <ProviderContext>
-      <NavBar />
-      <Modal />
-      <Consumer />
+      <RouterPages />
     </ProviderContext>
   );
 }
+
+export default App;

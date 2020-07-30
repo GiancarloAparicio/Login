@@ -25,8 +25,10 @@ const Modal = () => {
     event.preventDefault();
     let band= await Firebase.registerUser(data.email, data.password);
    
+    //User existente change
     dispatch(existsCurrentUser(band))
     
+    console.log(state)
   };
 
   return (

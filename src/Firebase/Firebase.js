@@ -1,5 +1,9 @@
+//Firebase
 import firebase from "firebase/app";
 import "firebase/auth";
+
+//Actions
+import { currentUser } from "../Context/AppActions";
 
 export const startFirebase = () => {
   let Config = {
@@ -16,8 +20,8 @@ export const startFirebase = () => {
   firebase.initializeApp(Config);
 };
 
-export const registerUser =  async (email, password) => {
-   return await firebase
+export const registerUser = async (email, password) => {
+  return await firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then(() => {
@@ -25,7 +29,7 @@ export const registerUser =  async (email, password) => {
       //Enviar email para verificar la cuenta del usuario
       return confirmEmail();
     })
-    .catch(function(error) {
+    .catch(function (error) {
       var errorCode = error.code;
       var errorMessage = error.message;
       console.log(errorMessage);
@@ -34,14 +38,15 @@ export const registerUser =  async (email, password) => {
 };
 
 export const loginUser = (email, password) => {
+
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(function() {
+    .then(function () {
       console.log("Login exito");
-      
+
     })
-    .catch(function(error) {
+    .catch(function (error) {
       let errorCode = error.code;
       let errorMessage = error.message;
       console.log(errorMessage);
@@ -49,8 +54,16 @@ export const loginUser = (email, password) => {
     });
 };
 
-const confirmEmail = async () => {
-   return await firebase
+export const listener = (dispatch) => {
+  firebase.auth().onAuthStateChanged((user)=>{
+    if(user){
+      dispatch(currentUser(user))
+    }
+  });
+}
+
+export const confirmEmail = async () => {
+  return await firebase
     .auth()
     .currentUser.sendEmailVerification()
     .then(() => {
@@ -62,3 +75,12 @@ const confirmEmail = async () => {
       return false;
     });
 };
+
+export const closeUser = ()=>{
+  firebase.auth().signOut().then(() =>{
+    console.log("session cerrada")
+  }).catch(function(error) {
+    // An error happened.
+  });
+  
+}
