@@ -57,10 +57,10 @@ const LoginForm = () => {
 
                 <div className="form-group mx-auto">
                     <button type="submit" className="btn mr-2 btn-success">
-                        Register
+                        Login
                     </button>
                     <button type="reset" className="btn btn-danger" onClick={resetInputs}>
-                        Close
+                        Cancel
                     </button>
                 </div>
 
