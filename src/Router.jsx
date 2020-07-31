@@ -1,7 +1,7 @@
 import React, { useContext,useEffect } from "react";
 
 //React Router Dom
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 //Pages
 import LoginPage from "./Pages/LoginPage";
