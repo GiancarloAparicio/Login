@@ -24,7 +24,7 @@ const RouterPages = () => {
         <>
             <Router>
                 <Switch>
-                    <Route exact path="/" component={ state?.currentUserExists===true? HomePage :LoginPage} />
+                    <Route path="/" component={ state?.currentUserExists===true? HomePage :LoginPage} />
                 </Switch>
             </Router>
             
