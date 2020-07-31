@@ -1,10 +1,3 @@
-// let allInputs = {
-//   inputLoginEmail: "",
-//   inputLoginPassword: "",
-//   inputRegisterEmail: "",
-//   inputRegisterPassword: "",
-// }
-
 let allInputs = {
   loginInputEmail: "",
   loginInputPassword: "",
@@ -14,7 +7,7 @@ let allInputs = {
 
 
 export const initalState = {
-  currentUserExists: localStorage["SESSION"],
+  currentUserExists: localStorage["SESSION"]=== undefined ? false : localStorage["SESSION"] ,
   currentUser: {},
   validateInputs: allInputs
 };

@@ -11,20 +11,20 @@ import HomePage from "./Pages/HomePage";
 import AppContext from "./Context/AppContext"
 
 //Firebase
-import * as Firebase from "./Firebase/Firebase";
+import {listener} from "./Firebase/Firebase";
 
 const RouterPages = () => {
     const [state, dispatch] = useContext(AppContext)
 
     useEffect(()=>{
-        Firebase.listener(dispatch)
+        listener(dispatch)
     },[])
 
     return (
         <>
             <Router>
                 <Switch>
-                    <Route exact path="/" component={ state?.currentUserExists? HomePage :LoginPage} />
+                    <Route exact path="/" component={ state?.currentUserExists===true? HomePage :LoginPage} />
                 </Switch>
             </Router>
             
