@@ -49,6 +49,7 @@ export const loginUser = (email, password, dispatch) => {
     })
     .catch((error) => {
       dispatch(statusInputs(error.code, "login"))
+      console.log(error)
     });
 };
 
