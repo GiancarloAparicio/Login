@@ -40,7 +40,7 @@ const LoginForm = () => {
     return (
         <>  
             <form onSubmit={loginForm} method="POST" className="card container mx-auto p-3">
-                <h4 className="p-2" >Login User: sssssssssss</h4>
+                <h4 className="p-2" >Login User :</h4>
                 <Input  name="email"
                         type="email" 
                         id="Email2"
