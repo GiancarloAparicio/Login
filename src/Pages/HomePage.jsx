@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import AppContext from "../Context/AppContext"
 import { closeUser } from "../Firebase/Firebase"
 import EmailCheck from "../includes/EmailCheck"
+import LoaderPage from "../includes/LoaderPage"
 
 //React Router Dom
 //import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
@@ -16,6 +17,9 @@ const HomePage = () => {
 
     return (
         <>
+
+            <LoaderPage loanding={(state?.currentUser===null)? "":"hidden"}/>
+
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
                 <a className="navbar-brand" href="./">Navbar</a>
                 <button className="navbar-toggler" data-toggle="collapse" data-target="#navbar2" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,13 +46,15 @@ const HomePage = () => {
             <div className="container">
 
                 {
-                    (state?.currentUser?.emailVerified)?
-                    <h1>Hola, usuario registrado y confirmado:  {state?.currentUser?.email}</h1>
-                    : <EmailCheck />
+                    (state?.currentUser?.emailVerified) ?
+                        <h1>Hola, usuario registrado y confirmado:  {state?.currentUser?.email}</h1>
+                        : <EmailCheck />
                 }
 
 
-                
+
+
+
 
                 {/* <Router>
                     <Switch>
@@ -57,7 +63,9 @@ const HomePage = () => {
                 </Router> */}
 
             </div>
+
         </>
+
 
 
     )
