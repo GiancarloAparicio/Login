@@ -46,6 +46,7 @@ const LoginForm = () => {
                         id="Email2"
                         validate={state?.validateInputs?.loginInputEmail}
                         placeholder="Enter email"
+                        messageError="Sorry, that username is not registered. Try again?"
                         onChange={inputChange} />
 
                 <Input  name="password"
@@ -53,6 +54,7 @@ const LoginForm = () => {
                         id="Password2"
                         validate={state?.validateInputs?.loginInputPassword}
                         placeholder="Password"
+                        messageError="Sorry, the password entered is incorrect. Try again?"
                         onChange={inputChange} />
 
                 <div className="form-group mx-auto">

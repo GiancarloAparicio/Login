@@ -43,7 +43,7 @@ const HomePage = () => {
 
                 {
                     (state?.currentUser?.emailVerified)?
-                    <h1>Hola usuario:  {state?.currentUser?.email}</h1>
+                    <h1>Hola, usuario registrado y confirmado:  {state?.currentUser?.email}</h1>
                     : <EmailCheck />
                 }
 

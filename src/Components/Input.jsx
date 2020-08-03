@@ -1,10 +1,10 @@
 import React from "react";
 
 
-const Input = ({ name = "name", type = "text", id = "Password1", placeholder = "", onChange = null, validate = "" }) => {
+const Input = ({messageError="Sorry, the entered field is incorrect. Try again?", name = "name", type = "text", id = "Password1", placeholder = "", onChange = null, validate = "" }) => {
 
     let className
-
+  
     switch (validate) {
         case "is-invalid":
             className = "form-control is-invalid"
@@ -20,7 +20,7 @@ const Input = ({ name = "name", type = "text", id = "Password1", placeholder = "
     }
 
     return (
-        <div className="form-group">
+        <div className="form-group mb-3">
             <label htmlFor={id}>{placeholder}</label>
             <input
                 name={name}
@@ -31,6 +31,11 @@ const Input = ({ name = "name", type = "text", id = "Password1", placeholder = "
                 placeholder={placeholder}
                 onChange={onChange}
             />
+            {
+                (validate === "is-invalid") ?
+                    <p className="invalid-feedback d-relative">{messageError}</p>
+                    : ""
+            }
         </div>
     )
 }

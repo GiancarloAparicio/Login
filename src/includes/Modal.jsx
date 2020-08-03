@@ -69,7 +69,9 @@ const Modal = () => {
             id="Email1"
             validate={state?.validateInputs?.registerInputEmail}
             placeholder="Enter email"
+            messageError="Sorry, that username's taken. Try another?"
             onChange={inputChange} />
+
           <Input name="password"
             type="password"
             id="Password1"
