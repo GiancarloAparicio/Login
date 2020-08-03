@@ -18,7 +18,7 @@ const RouterPages = () => {
 
     useEffect(()=>{
         listener(dispatch)
-    },[])
+    },[dispatch])
 
     return (
         <>

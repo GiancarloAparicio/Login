@@ -25,9 +25,12 @@ export const registerUser = (email, password, dispatch) => {
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then(() => {
+      //Usuario creado
       dispatch(existsCurrentUser(true))
       dispatch(statusInputs("reset-status", "register"))
-      confirmEmail();
+
+      //Confirma cuenta de usuario
+      confirmEmail(dispatch);
     })
     .catch(function (error) {
       dispatch(statusInputs(error.code, "register"))
@@ -40,7 +43,6 @@ export const loginUser = (email, password, dispatch) => {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(() => {
-      console.log("Iniciando session")
         localStorage["SESSION"] = true;
         dispatch(existsCurrentUser(true))
         dispatch(statusInputs("reset-status", "login"))
@@ -58,16 +60,12 @@ export const listener = (dispatch) => {
   });
 }
 
-export const confirmEmail = () => {
+export const confirmEmail = (dispatch) => {
   firebase
     .auth()
     .currentUser.sendEmailVerification()
-    .then(() => {
-      console.log("Usuario email confirmed");
-
-    })
     .catch(error => {
-      console.warn(error);
+      dispatch(statusInputs(error.code, "login"))
     });
 };
 

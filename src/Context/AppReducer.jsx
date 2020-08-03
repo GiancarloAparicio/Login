@@ -1,4 +1,4 @@
-import { CHANGE_CURRENT_USER, CHANGE_EXISTS_CURRENT_USER, VALIDATE_STATUS_INPUTS } from "./AppType";
+import { CHANGE_CURRENT_USER, CHANGE_EXISTS_CURRENT_USER, VALIDATE_STATUS_INPUTS, RESET_ERROR_MESSAGE } from "./AppType";
 
 export const AppReducer = (state, action) => {
   switch (action.type) {
@@ -21,6 +21,16 @@ export const AppReducer = (state, action) => {
           ...action.payload
         }
       };
+
+      case RESET_ERROR_MESSAGE:
+        return {
+          ...state,
+          validateInputs: {
+            ...state.validateInputs,
+            ...action.payload
+          }
+        };
+    
 
     default:
       return state;

@@ -3,6 +3,8 @@ let allInputs = {
   loginInputPassword: "",
   registerInputEmail: "",
   registerInputPassword: "",
+  manyRequests: "",
+  errorMessage:""
 }
 
 
