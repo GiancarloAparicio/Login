@@ -56,6 +56,7 @@ export const listener = (dispatch) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       dispatch(currentUser(user))
+
     }
   });
 }

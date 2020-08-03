@@ -1,6 +1,7 @@
 import React, { useContext } from "react"
 import AppContext from "../Context/AppContext"
 import { closeUser } from "../Firebase/Firebase"
+import EmailCheck from "../includes/EmailCheck"
 
 //React Router Dom
 //import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
@@ -16,18 +17,18 @@ const HomePage = () => {
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-                <a className="navbar-brand" href="/">Navbar</a>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation">
+                <a className="navbar-brand" href="./">Navbar</a>
+                <button className="navbar-toggler" data-toggle="collapse" data-target="#navbar2" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="navbar-collapse collapse show" id="navbar" >
+                <div className="navbar-collapse collapse" id="navbar2" >
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item active">
-                            <a className="nav-link" href="/">Home</a>
+                            <a className="nav-link" href="./">Home</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/">Courses</a>
+                            <a className="nav-link" href="./">Courses</a>
                         </li>
                         <li>
                             <button className="btn btn-danger" onClick={closeSession}>
@@ -40,8 +41,14 @@ const HomePage = () => {
 
             <div className="container">
 
+                {
+                    (state?.currentUser?.emailVerified)?
+                    <h1>Hola usuario:  {state?.currentUser?.email}</h1>
+                    : <EmailCheck />
+                }
 
-                <h1>Hola usuario:  {state?.currentUser?.email}</h1>
+
+                
 
                 {/* <Router>
                     <Switch>
