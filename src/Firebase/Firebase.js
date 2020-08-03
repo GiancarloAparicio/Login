@@ -43,8 +43,8 @@ export const loginUser = (email, password, dispatch) => {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(() => {
-        localStorage["SESSION"] = true;
-        dispatch(existsCurrentUser(true))
+        localStorage["SESSION"] = "true";
+        dispatch(existsCurrentUser("true"))
         dispatch(statusInputs("reset-status", "login"))
     })
     .catch((error) => {

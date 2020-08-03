@@ -13,8 +13,6 @@ const HomePage = () => {
         closeUser(dispatch)
     }
 
-    console.log(state)
-
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary">

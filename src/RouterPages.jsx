@@ -18,11 +18,10 @@ const RouterPages = () => {
         listener(dispatch)
     },[dispatch])
 
-    return (
-        <>
-            { state?.currentUserExists===true? <HomePage /> : <LoginPage />} 
-        </>
 
+    return (
+        //Error Solucionarlo
+        state?.currentUserExists==="true"? <HomePage /> : <LoginPage />    
     )
 }
 

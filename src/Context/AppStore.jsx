@@ -8,7 +8,7 @@ let allInputs = {
 
 
 export const initalState = {
-  currentUserExists: localStorage["SESSION"]=== undefined ? false : localStorage["SESSION"] ,
+  currentUserExists: localStorage["SESSION"]=== undefined ? "false" : localStorage["SESSION"] ,
   currentUser: {},
   validateInputs: allInputs
 };
