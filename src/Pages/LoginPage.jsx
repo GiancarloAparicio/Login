@@ -20,8 +20,8 @@ const LoginPage = () => {
                 <div className="col-md-6 mx-auto">
                     <LoginForm />
                     {
-                        (state?.validateInputs?.manyRequests || state?.validateInputs?.errorMessage )?
-                        <ErrorMessage  /> : ""       
+                        (state?.validateInputs?.errorMessage )?
+                        <ErrorMessage  /> : ""      
                     }
                 </div>
 

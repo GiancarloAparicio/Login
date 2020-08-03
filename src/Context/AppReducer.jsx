@@ -22,17 +22,18 @@ export const AppReducer = (state, action) => {
         }
       };
 
-      case RESET_ERROR_MESSAGE:
-        return {
-          ...state,
-          validateInputs: {
-            ...state.validateInputs,
-            ...action.payload
-          }
-        };
-    
+    case RESET_ERROR_MESSAGE:
+      return {
+        ...state,
+        validateInputs: {
+          ...state.validateInputs,
+          ...action.payload
+        }
+      };
 
     default:
       return state;
   }
 };
+
+

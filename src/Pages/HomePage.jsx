@@ -2,6 +2,9 @@ import React, { useContext } from "react"
 import AppContext from "../Context/AppContext"
 import { closeUser } from "../Firebase/Firebase"
 
+//React Router Dom
+//import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+
 const HomePage = () => {
 
     const [state, dispatch] = useContext(AppContext)
@@ -28,7 +31,7 @@ const HomePage = () => {
                         <li className="nav-item">
                             <a className="nav-link" href="/">Courses</a>
                         </li>
-                        <li> 
+                        <li>
                             <button className="btn btn-danger" onClick={closeSession}>
                                 Cerrar Session
                             </button>
@@ -38,7 +41,15 @@ const HomePage = () => {
             </nav>
 
             <div className="container">
+
+
                 <h1>Hola usuario:  {state?.currentUser?.email}</h1>
+
+                {/* <Router>
+                    <Switch>
+                        <Route path="/" component={state?.currentUserExists == true ? HomePage : LoginPage} />
+                    </Switch>
+                </Router> */}
 
             </div>
         </>

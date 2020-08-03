@@ -1,7 +1,5 @@
 import React, { useContext,useEffect } from "react";
 
-//React Router Dom
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 //Pages
 import LoginPage from "./Pages/LoginPage";
@@ -22,12 +20,7 @@ const RouterPages = () => {
 
     return (
         <>
-            <Router>
-                <Switch>
-                    <Route path="/" component={ state?.currentUserExists===true? HomePage :LoginPage} />
-                </Switch>
-            </Router>
-            
+            { state?.currentUserExists===true? <HomePage /> : <LoginPage />} 
         </>
 
     )

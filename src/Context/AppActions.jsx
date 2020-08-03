@@ -15,13 +15,13 @@ export const statusInputs = (status, authForm) => ({
   payload: validateStatusInputs(status, authForm)
 })
 
-export const closeMessageError=()=>({
+export const closeMessageError = () => ({
   type: RESET_ERROR_MESSAGE,
   payload: {
-    manyRequests:"",
-    errorMessage:""
+    errorMessage: ""
   }
 })
+
 
 /*
 * Support functions
@@ -44,9 +44,9 @@ const validateStatusInputs = (status, authForm) => {
         [authForm + "InputPassword"]: "is-invalid"
       })
 
-    case "auth/too-many-requests":
+    case "auth/user-not-found":
       return ({
-        manyRequests:"true"
+        [authForm + "InputEmail"]: "is-invalid"
       })
 
     case "reset-status":
@@ -55,13 +55,11 @@ const validateStatusInputs = (status, authForm) => {
         [authForm + "InputPassword"]: ""
       })
 
-    default:
+    default:   //"auth/too-many-requests"
       return ({
-        error:status
+        errorMessage: status
       })
 
   }
-
-
 
 }
