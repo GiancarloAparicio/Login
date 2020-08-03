@@ -56,7 +56,6 @@ export const listener = (dispatch) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       dispatch(currentUser(user))
-
     }
   });
 }
@@ -65,6 +64,18 @@ export const confirmEmail = (dispatch) => {
   firebase
     .auth()
     .currentUser.sendEmailVerification()
+    .then(()=>{
+      //Cerrando el modal de registro
+      let closeModalRegister=document.querySelector("#closeRegister")
+      let restModalRegister=document.querySelector("#resetRegister")
+      closeModalRegister.click()
+      restModalRegister.click()
+
+      //Actualizar el state
+      localStorage["SESSION"] = "true";
+      dispatch(existsCurrentUser("true"))
+      
+    })
     .catch(error => {
       dispatch(statusInputs(error.code, "login"))
     });

@@ -35,6 +35,7 @@ const Modal = () => {
     dispatch(statusInputs("reset-status", "register"))
   }
 
+
   return (
     <form
       method="POST"
@@ -58,6 +59,7 @@ const Modal = () => {
             className="close"
             data-dismiss="modal"
             aria-label="Close"
+            id="closeRegister"
           >
             <span aria-hidden="true">&times;</span>
           </button>
@@ -84,7 +86,7 @@ const Modal = () => {
           <button type="submit" className="btn btn-success" >
             Register
           </button>
-          <button type="reset" className="btn btn-danger" onClick={resetInputs} data-dismiss="modal">
+          <button type="reset" id="resetRegister" className="btn btn-danger" onClick={resetInputs}>
             Close
           </button>
         </div>
