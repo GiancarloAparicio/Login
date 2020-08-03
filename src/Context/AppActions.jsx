@@ -55,8 +55,10 @@ const validateStatusInputs = (status, authForm) => {
         [authForm + "InputPassword"]: ""
       })
 
-    case "400":
-      console.log("Tengo este error :V"); break;
+    case "auth/email-already-in-use":
+      return ({
+        [authForm + "InputEmail"]: "is-invalid"
+      })
 
     default:   //"auth/too-many-requests"
       return ({

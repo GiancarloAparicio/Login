@@ -13,8 +13,6 @@ const ErrorMessage = () => {
         message = "Demasiados intentos de iniciar session, intente mas tarde..."
         : message = "Error inesperado, comunicar a la pagina... :("
 
-    console.log(state?.validateInputs?.errorMessage)
-
     const closeMessage = () => {
         dispatch(closeMessageError())
     }
